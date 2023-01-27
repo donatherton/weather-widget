@@ -1,2 +1,2 @@
 # weather-widget
-Python/gi widget to display current and forecast weather
+Python/GTK widget to display current and forecast weather
