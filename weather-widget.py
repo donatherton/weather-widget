@@ -25,6 +25,7 @@ import json
 import os
 import sys
 
+
 class Win(Gtk.Window):
     def __init__(self):
         super().__init__()
@@ -275,9 +276,9 @@ class Win(Gtk.Window):
         pres = cc['main']['pressure']
         humidity = cc['main']['humidity']
 
-        sunrise = cc['sys']['sunrise']
-        sunset = cc['sys']['sunset']
-        update = cc['dt']
+        sunrise = cc['sys']['sunrise'] + cc['timezone']
+        sunset = cc['sys']['sunset'] + cc['timezone']
+        update = cc['dt'] + cc['timezone']
         update = datetime.fromtimestamp(update)
 
         wnd_dir = self.get_wnd_dir(wnd_dir)
@@ -661,8 +662,8 @@ class Win(Gtk.Window):
         grid.set_row_spacing(1)
         flowbox.add(grid)
 
-        sunrise = self.forecast['city']['sunrise']
-        sunset = self.forecast['city']['sunset']
+        sunrise = self.forecast['city']['sunrise'] + self.forecast['city']['timezone']
+        sunset = self.forecast['city']['sunset'] + self.forecast['city']['timezone']
         sunrisetime = datetime.fromtimestamp(sunrise)
         sunrise = sunrisetime.time().strftime('%H:%M')
         sunsettime = datetime.fromtimestamp(sunset)
